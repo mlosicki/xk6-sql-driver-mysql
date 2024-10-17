@@ -1,14 +1,18 @@
 import sql from "k6/x/sql";
-import driver from "k6/x/sql/driver/ramsql";
+import driver from "k6/x/sql/driver/mysql";
 
-const db = sql.open(driver, "test_db");
+// The second argument is a MySQL connection string, e.g.
+// myuser:mypass@tcp(127.0.0.1:3306)/mydb
+const db = sql.open(driver, "");
 
 export function setup() {
-  db.exec(`CREATE TABLE IF NOT EXISTS namevalue (
-             id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name VARCHAR NOT NULL,
-             value VARCHAR
-           );`);
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS keyvalues (
+      id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      \`key\` VARCHAR(50) NOT NULL,
+      value VARCHAR(50) NULL
+    );
+  `);
 }
 
 export function teardown() {
@@ -16,10 +20,11 @@ export function teardown() {
 }
 
 export default function () {
-  db.exec("INSERT INTO namevalue (name, value) VALUES('extension-name', 'xk6-foo');");
+  db.exec("INSERT INTO keyvalues (`key`, value) VALUES('plugin-name', 'k6-plugin-sql');");
 
-  let results = sql.query(db, "SELECT * FROM namevalue WHERE name = $1;", "extension-name");
+  let results = sql.query(db, "SELECT * FROM keyvalues WHERE `key` = ?;", "plugin-name");
   for (const row of results) {
-    console.log(`name: ${row.name}, value: ${row.value}`);
+    // Convert array of ASCII integers into strings. See https://github.com/grafana/xk6-sql/issues/12
+    console.log(`key: ${String.fromCharCode(...row.key)}, value: ${String.fromCharCode(...row.value)}`);
   }
 }
