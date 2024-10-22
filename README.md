@@ -50,3 +50,27 @@ export default function () {
 ## Usage
 
 Check the [xk6-sql documentation](https://github.com/grafana/xk6-sql) on how to use this database driver.
+
+
+### TLS Support
+
+> [!IMPORTANT]
+>
+> TLS support has been adopted more or less unchanged from xk6-sql v0.4.1.
+> Refactoring is required.
+
+To enable TLS support, call `loadTLS` from the script, before calling `open`. [examples/example-tls.js](examples/example-tls.js) is an example.
+
+`loadTLS` accepts the following options:
+
+```javascript
+loadTLS({
+  enableTLS: true,
+  insecureSkipTLSverify: true,
+  minVersion: sql.TLS_1_2,
+  // Possible values: sql.TLS_1_0, sql.TLS_1_1, sql.TLS_1_2, sql.TLS_1_3
+  caCertFile: '/filepath/to/ca.pem',
+  clientCertFile: '/filepath/to/client-cert.pem',
+  clientKeyFile: '/filepath/to/client-key.pem',
+});
+```
