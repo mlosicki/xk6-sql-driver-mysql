@@ -1,4 +1,4 @@
-// Adapted more or less unchanged from: https://github.com/surajvshankar/xk6-sql/blob/b72a1e0d2d05227eae60f0bb45ec01abb152653d/sql.go
+// Adapted more or less unchanged from: https://github.com/grafana/xk6-sql/blob/v0.4.1/sql.go
 // It will have to be refactored.
 
 package mysql
