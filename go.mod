@@ -5,7 +5,7 @@ go 1.22
 require (
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/grafana/sobek v0.0.0-20240927094302-19dd311f018f
-	github.com/grafana/xk6-sql v0.5.0-alpha.4
+	github.com/grafana/xk6-sql v1.0.0
 	github.com/stretchr/testify v1.9.0
 	github.com/testcontainers/testcontainers-go/modules/mysql v0.33.0
 	go.k6.io/k6 v0.54.0
