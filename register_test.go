@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/grafana/xk6-sql/sqltest"
+	"github.com/mlosicki/xk6-sql-ext/sqltest"
 	"github.com/stretchr/testify/require"
 
 	"github.com/testcontainers/testcontainers-go/modules/mysql"
