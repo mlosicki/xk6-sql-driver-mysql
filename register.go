@@ -2,7 +2,7 @@
 package mysql
 
 import (
-	"github.com/grafana/xk6-sql/sql"
+	"github.com/mlosicki/xk6-sql-ext/sql"
 	"go.k6.io/k6/js/modules"
 
 	// Blank import required for initialization of driver.
